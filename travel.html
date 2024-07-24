@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stanley Family Travels</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-right: 1px solid #ccc;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: black;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .sidebar a.active,
+        .sidebar a:hover {
+            background-color: #ddd;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="#" class="tab-link active" data-story="home">Home</a>
+        <a href="#" class="tab-link" data-story="nyc">New York City</a>
+        <a href="#" class="tab-link" data-story="gettysburg">Gettysburg</a>
+        <a href="#" class="tab-link" data-story="philadelphia">Philadelphia</a>
+        <a href="#" class="tab-link" data-story="niagara">Niagara Falls</a>
+        <a href="#" class="tab-link" data-story="neworleans">New Orleans</a>
+        <!-- Add more tabs as needed -->
+    </div>
+    <div class="content" id="content">
+        <div id="home">
+            <h2>Welcome to Our Travels</h2>
+            <p>The goal is to visit all 50 states! Follow our journey as we explore different cities and landmarks across the United States. Click on the tabs to read about our adventures.</p>
+        </div>
+        <!-- Other content will be dynamically injected here -->
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-link');
+            const contentDiv = document.getElementById('content');
+
+            const stories = {
+                home: `<div id="home">
+                        <h2>Welcome to Our Travels</h2>
+                        <p>The Stanley family's goal is to visit all 50 states! Follow our journey as we explore different cities and landmarks across the United States. Click on the tabs to read about our adventures.</p>
+                       </div>`,
+                nyc: `<div id="nyc">
+                            <h2>New York City</h2>
+                            <p>Details about the trip to NYC...</p>
+                            <img src="images/nyc.jpg" alt="NYC Photo">
+                       </div>`,
+                gettysburg: `<div id="gettysburg">
+                            <h2>Gettysburg</h2>
+                            <p>Details about the trip to Gettysburg...</p>
+                            <img src="images/gettysburg.jpg" alt="Gettysburg Photo">
+                       </div>`,
+                philadelphia: `<div id="philadelphia">
+                            <h2>Philadelphia</h2>
+                            <p>Details about the trip to Philadelphia...</p>
+                            <img src="images/philadelphia.jpg" alt="Philadelphia Photo">
+                       </div>`,
+                niagara: `<div id="niagara">
+                            <h2>Niagara Falls</h2>
+                            <p>Details about the trip to Niagara Falls...</p>
+                            <img src="images/niagara.jpg" alt="Niagara Falls Photo">
+                       </div>`,
+                neworleans: `<div id="neworleans">
+                            <h2>New Orleans</h2>
+                            <p>Details about the trip to New Orleans...</p>
+                            <img src="images/neworleans.jpg" alt="New Orleans Photo">
+                       </div>`,
+                // Add more stories as needed
+            };
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+
+                    // Update content based on the clicked tab
+                    const storyId = tab.getAttribute('data-story');
+                    contentDiv.innerHTML = stories[storyId];
+                });
+            });
+
+            // Load default content (home)
+            contentDiv.innerHTML = stories.home;
+        });
+    </script>
+</body>
+</html>

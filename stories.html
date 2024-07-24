@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stanley Family Stories</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-right: 1px solid #ccc;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: black;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .sidebar a.active,
+        .sidebar a:hover {
+            background-color: #ddd;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="#" class="tab-link active" data-story="home">Home</a>
+        <a href="#" class="tab-link" data-story="marriage">Marriage</a>
+        <a href="#" class="tab-link" data-story="adoption">Adoption</a>
+        <a href="#" class="tab-link" data-story="vacation">Vacation</a>
+        <!-- Add more tabs as needed -->
+    </div>
+    <div class="content" id="content">
+        <div id="home">
+            <h2>Welcome to Our Stories</h2>
+            <p>This is the home tab content. Here you can read about various events in the Stanley family's life. Click on the tabs to read more stories.</p>
+        </div>
+        <!-- Other content will be dynamically injected here -->
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-link');
+            const contentDiv = document.getElementById('content');
+
+            const stories = {
+                home: `<div id="home">
+                        <h2>Welcome to Our Stories</h2>
+                        <p>This is the home tab content. Here you can read about various events in the Stanley family's life. Click on the tabs to read more stories.</p>
+                       </div>`,
+                marriage: `<div id="marriage">
+                            <h2>Our Marriage Story</h2>
+                            <p>Details about the marriage...</p>
+                            <img src="images/marriage.jpg" alt="Marriage Photo">
+                           </div>`,
+                adoption: `<div id="adoption">
+                            <h2>Our Adoption Story</h2>
+                            <p>Details about the adoption...</p>
+                            <img src="images/adoption.jpg" alt="Adoption Photo">
+                           </div>`,
+                vacation: `<div id="vacation">
+                            <h2>Our Vacation Story</h2>
+                            <p>Details about the vacation...</p>
+                            <img src="images/vacation.jpg" alt="Vacation Photo">
+                           </div>`,
+                // Add more stories as needed
+            };
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+
+                    // Update content based on the clicked tab
+                    const storyId = tab.getAttribute('data-story');
+                    contentDiv.innerHTML = stories[storyId];
+                });
+            });
+
+            // Load default content (home)
+            contentDiv.innerHTML = stories.home;
+        });
+    </script>
+</body>
+</html>
